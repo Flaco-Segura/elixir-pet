@@ -16,10 +16,9 @@ RUN mkdir -p $HOME/.asdf && \
 COPY --chown=asdf:asdf .tool-versions /home/asdf/.tool-versions
 
 ENV LANG=C.UTF-8 PATH=/home/asdf/.asdf/bin:/home/asdf/.asdf/shims:$PATH
+ENV KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --without-wx --without-docs"
 
 WORKDIR /home/asdf
-
-RUN export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --without-wx --without-docs"
 
 RUN asdf plugin-add erlang && \
     asdf plugin-add elixir
