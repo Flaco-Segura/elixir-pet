@@ -1,10 +1,22 @@
-FROM alpine:3
+FROM alpine:3.5
 
 ARG ASDF_VERSION=0.14.0
 
 RUN apk --no-cache upgrade && \
     apk add --update alpine-sdk && \
-    apk add --no-cache git curl bash zsh bison perl perl-dev ncurses-dev libxslt
+    apk add --no-cache \
+        git \
+        curl \
+        bash \
+        zsh \
+        bison \
+        perl \
+        perl-dev \
+        ncurses-dev \
+        libxslt \
+        erlang \
+        erlang-dev \
+        erlang-crypto
 
 RUN adduser -s /bin/bash -D -u 1000 asdf
 
@@ -19,6 +31,10 @@ ENV LANG=C.UTF-8 PATH=/home/asdf/.asdf/bin:/home/asdf/.asdf/shims:$PATH
 ENV KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --without-wx --without-docs"
 
 WORKDIR /home/asdf
+
+COPY ./examples .
+
+VOLUME /home/asdf/examples /examples
 
 RUN asdf plugin-add erlang && \
     asdf plugin-add elixir
