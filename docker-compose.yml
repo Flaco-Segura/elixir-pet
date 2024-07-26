@@ -1,0 +1,12 @@
+services:  
+  app:
+    container_name: the-app
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./examples:/home/examples
+
+volumes:
+  examples:
