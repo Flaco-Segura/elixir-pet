@@ -4,7 +4,7 @@
 
 ```bash
 docker compose build
-docker compose up
+docker compose up -d
 docker exec -it the-app sh
 ```
 
